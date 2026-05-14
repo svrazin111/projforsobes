@@ -14,7 +14,7 @@
 
 <script setup lang="ts">
 import Menubar from 'primevue/menubar'
-import { MenuItem } from 'primevue/menuitem'
+import type { MenuItem } from 'primevue/menuitem'
 import { onMounted, ref } from 'vue'
 
 import { useUserStore } from '@/app/plugins/pinia/user'

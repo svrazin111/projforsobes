@@ -16,7 +16,12 @@ export const mountVueInCell = (component: any, props: Record<string, any>, el: H
   app.use(PrimeVue, {
     unstyled: false,
     ripple: true,
-    theme: { preset: Aura },
+    theme: {
+      preset: Aura,
+      options: {
+        darkModeSelector: 'none'
+      }
+    },
     locale: ru
   })
 

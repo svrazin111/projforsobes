@@ -24,7 +24,12 @@ const pinia = createPinia()
 app.use(PrimeVue, {
   unstyled: false,
   ripple: true,
-  theme: { preset: Aura },
+  theme: {
+    preset: Aura,
+    options: {
+      darkModeSelector: 'none'
+    }
+  },
   locale: ru
 })
 app.directive('ripple', Ripple)

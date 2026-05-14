@@ -8,6 +8,10 @@
 @import './splitpanes.css';
 @import './misc.css';
 
+html {
+  color-scheme: light;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
