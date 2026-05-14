@@ -93,6 +93,14 @@ const updateWidths = () => {
 
   ves_max_min_width.value = props.real_widths[11] ?? 0
 }
+
+watch(
+  () => props.real_widths,
+  () => {
+    updateWidths()
+  },
+  { deep: true, immediate: true }
+)
 </script>
 
 <style scoped>

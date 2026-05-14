@@ -27,7 +27,7 @@ import {
   Sorter,
   TabulatorFull as Tabulator
 } from 'tabulator-tables'
-import { nextTick, onMounted, useTemplateRef, watch } from 'vue'
+import { nextTick, onMounted, onUnmounted, useTemplateRef, watch } from 'vue'
 
 import { columns_for_groupping } from './columns_for_groupping'
 import { filterColumns, getHierarchyTitleForExpanderColumn, groupToTree } from './groupToTree'
@@ -60,6 +60,39 @@ const emit = defineEmits(['rowDblClick', 'rowSelectionChanged', 'dataSorted', 'c
 const grid = useTemplateRef('grid')
 
 let table: Tabulator = undefined
+let resizeFrame = 0
+
+const emitColumnWidths = () => {
+  if (!table) return
+
+  emit(
+    'columnResized',
+    table.getColumns().map((item) => item.getWidth())
+  )
+}
+
+const scheduleColumnWidthsEmit = () => {
+  cancelAnimationFrame(resizeFrame)
+  resizeFrame = requestAnimationFrame(emitColumnWidths)
+}
+
+const stopLiveColumnResize = () => {
+  document.body.removeEventListener('mousemove', scheduleColumnWidthsEmit)
+  document.body.removeEventListener('mouseup', stopLiveColumnResize)
+  document.body.removeEventListener('touchmove', scheduleColumnWidthsEmit)
+  document.body.removeEventListener('touchend', stopLiveColumnResize)
+  scheduleColumnWidthsEmit()
+}
+
+const startLiveColumnResize = (event: MouseEvent | TouchEvent) => {
+  if (!(event.target instanceof Element)) return
+  if (!event.target.closest('.tabulator-col-resize-handle')) return
+
+  document.body.addEventListener('mousemove', scheduleColumnWidthsEmit)
+  document.body.addEventListener('mouseup', stopLiveColumnResize)
+  document.body.addEventListener('touchmove', scheduleColumnWidthsEmit)
+  document.body.addEventListener('touchend', stopLiveColumnResize)
+}
 
 onMounted(() => {
   table = new Tabulator(grid.value, {
@@ -84,6 +117,9 @@ onMounted(() => {
     dataTreeBranchElement: false,
     rowFormatter: props.rowFormatter
   })
+
+  grid.value?.addEventListener('mousedown', startLiveColumnResize, true)
+  grid.value?.addEventListener('touchstart', startLiveColumnResize, true)
 
   table.on('rowDblClick', (e, row) => {
     emit('rowDblClick', row, e)
@@ -121,13 +157,7 @@ onMounted(() => {
   })
 
   table.on('columnResized', (column: ColumnComponent) => {
-    emit(
-      'columnResized',
-      column
-        .getTable()
-        .getColumns()
-        .map((item) => item.getWidth())
-    )
+    emitColumnWidths()
   })
 
   nextTick(() => {
@@ -147,11 +177,15 @@ onMounted(() => {
   }, 250)
 
   setTimeout(() => {
-    emit(
-      'columnResized',
-      table.getColumns().map((item) => item.getWidth())
-    )
+    emitColumnWidths()
   }, 1000)
+})
+
+onUnmounted(() => {
+  cancelAnimationFrame(resizeFrame)
+  grid.value?.removeEventListener('mousedown', startLiveColumnResize, true)
+  grid.value?.removeEventListener('touchstart', startLiveColumnResize, true)
+  stopLiveColumnResize()
 })
 
 watch(
