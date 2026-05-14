@@ -1,0 +1,47 @@
+.window-controls {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  height: 27px;
+  width: 27px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: #b2daff;
+  transition: all ease-in-out 0.3s;
+}
+
+.window-controls:hover {
+  background-color: #a0c8ee;
+}
+
+.window-controls-danger:hover {
+  background-color: #eea0a0;
+}
+
+/* ===========================
+   Overrides
+   =========================== */
+
+.jqx-window-header {
+  background-color: #b2daff !important;
+  height: 12px !important;
+  border: none !important;
+  border-radius: 0px !important;
+}
+
+.jqx-window-content {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0px !important;
+}
+
+.jqx-window-close-button {
+  display: none !important;
+}
+
+.jqx-window {
+  border: 1px solid gray;
+  box-shadow: lightgray 4px 6px 6px 0px;
+  border-radius: 0px !important;
+}

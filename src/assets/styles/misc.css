@@ -1,0 +1,46 @@
+.img-btn {
+  height: 20px;
+  width: 20px;
+  border: 1px solid gray;
+  border-radius: 2px;
+  padding: 2px;
+  cursor: pointer;
+  background-color: white;
+  transition: background-color 0.15s ease-in-out;
+}
+
+.img-btn:hover {
+  background-color: rgb(206, 194, 255);
+}
+
+.img-btn-disabled {
+  background-color: lightgray;
+  opacity: 0.75;
+  cursor: default;
+}
+
+input.p-colorpicker-preview {
+  width: 20px !important;
+  height: 20px !important;
+}
+
+.pulse-btn {
+  animation: pulse-colors 0.5s infinite alternate;
+}
+
+@keyframes pulse-colors {
+  0% {
+    border-color: var(--p-button-border, #dde6e0);
+  }
+  100% {
+    border-color: var(--p-button-border, #ef4444);
+  }
+}
+
+.x-spreadsheet-sheet {
+  height: calc(100vh - 220px) !important;
+}
+
+.pdf-iframe {
+  height: calc(100vh - 220px) !important;
+}

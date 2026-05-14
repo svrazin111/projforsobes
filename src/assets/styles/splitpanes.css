@@ -1,0 +1,32 @@
+.default-theme.splitpanes--vertical > .splitpanes__splitter {
+  background: #c2c2c2;
+  background: linear-gradient(
+    90deg,
+    rgba(194, 194, 194, 1) 0%,
+    rgba(224, 224, 224, 1) 50%,
+    rgba(194, 194, 194, 1) 100%
+  );
+  border: none !important;
+  margin: 0px !important;
+}
+
+.default-theme.splitpanes--horizontal > .splitpanes__splitter {
+  background: #c2c2c2;
+  background: #c2c2c2;
+  background: linear-gradient(
+    0deg,
+    rgba(194, 194, 194, 1) 0%,
+    rgba(224, 224, 224, 1) 50%,
+    rgba(194, 194, 194, 1) 100%
+  );
+  border: none !important;
+  margin: 0px !important;
+}
+
+.splitpanes__splitter::before {
+  background-color: gray !important;
+}
+
+.splitpanes__splitter::after {
+  background-color: gray !important;
+}

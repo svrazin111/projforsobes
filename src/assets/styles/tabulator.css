@@ -1,0 +1,124 @@
+.tabulator-row.tabulator-group {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  border: none !important;
+}
+
+.tabulator-data-tree-branch-empty {
+  width: 0px !important;
+}
+
+.tabulator-col-title {
+  white-space: normal;
+  padding-right: 5px !important;
+  font-size: 10px !important;
+  text-align: center;
+}
+
+.tabulator-col {
+  justify-content: center !important;
+}
+
+.tabulator-cell {
+  font-size: 10px !important;
+  padding: 2px !important;
+}
+
+.tabulator-header-filter {
+  border: 1px solid gray;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.tabulator-tableholder {
+  background-color: #e6e6e6 !important;
+}
+
+.sort-order-badge {
+  margin-left: 4px;
+  font-size: 10px;
+  background: #10b981;
+  color: white;
+  border-radius: 100%;
+  width: 14px;
+  height: 14px;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.tabulator-col-sorter {
+  right: -1px !important;
+}
+
+.tabulator-row {
+  min-height: 14px !important;
+}
+
+.tabulator-tooltip {
+  padding: 0.5rem 0.75rem;
+  border-radius: 6px;
+  background: #303036;
+  color: white;
+  pointer-events: none;
+  z-index: 100000 !important;
+  font-size: 13px !important;
+  line-height: 16px !important;
+  padding: 4px 4px 4px 8px !important;
+}
+
+.tabulator-row.tabulator-selected {
+  background-color: #7fceff !important;
+}
+
+.tabulator-row.tabulator-selectable {
+  transition: background-color ease-in-out 0.15s;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tabulator-row.tabulator-selectable:hover {
+    background-color: #b2e1ff;
+
+    cursor: pointer;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .tabulator-row.tabulator-selected:hover {
+    background-color: #b2e1ff;
+    cursor: pointer;
+  }
+}
+
+.clickable-cell {
+  background-color: #ffffe0;
+  border: solid 1px lightgray;
+  transition: background-color ease-in-out 0.15s;
+}
+
+.clickable-cell:hover {
+  background-color: #e7e7c6;
+}
+
+.tabulator-col-content {
+  padding-top: 2px !important;
+  padding-bottom: 2px !important;
+}
+
+.tabulator-header-filter {
+  border-radius: 0px !important;
+}
+
+.tabulator-header-filter > input {
+  padding: 0px !important;
+  margin: 0px !important;
+  font-size: 12px;
+  font-weight: 400;
+  color: blue;
+}
+
+.tabulator-header-filter > input:focus {
+  outline: none;
+}
+
+.tabulator .tabulator-row .no-padding-cell {
+  padding: 0px !important;
+}

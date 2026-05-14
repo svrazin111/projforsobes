@@ -1,0 +1,287 @@
+/* ===========================
+   SELECT & TOGGLE BUTTONS
+   =========================== */
+
+.p-select {
+  border-radius: 2px !important;
+}
+
+.p-select-label {
+  font-size: 12px !important;
+  padding: 2px !important;
+  color: black !important;
+}
+
+.p-select-label.p-placeholder {
+  color: lightslategray !important;
+}
+
+.p-togglebutton-label {
+  font-size: 12px !important;
+}
+
+.p-togglebutton-content {
+  background: none !important;
+  font-size: 10px !important;
+  padding: 0 !important;
+}
+
+.p-togglebutton-checked {
+  background-color: #10b981 !important;
+  color: white !important;
+}
+
+/* ===========================
+   TOOLTIP
+   =========================== */
+
+.p-tooltip {
+  z-index: 100000 !important;
+}
+
+.p-tooltip-text {
+  font-size: 13px !important;
+  line-height: 16px !important;
+  padding: 4px 4px 4px 8px !important;
+}
+
+/* ===========================
+   MENUBAR
+   =========================== */
+
+.p-menubar-item-label {
+  white-space: nowrap !important;
+  font-size: 12px !important;
+}
+
+.p-menubar-submenu {
+  z-index: 100000 !important;
+}
+
+.p-menubar-item-content,
+.p-menubar-item-link,
+.p-menubar-submenu,
+.p-tieredmenu,
+.p-tieredmenu-overlay,
+.p-tieredmenu-root-list,
+.p-tieredmenu-item-content,
+.p-tieredmenu-item-link,
+.p-tieredmenu-submenu {
+  min-width: 30px !important;
+  padding: 3px !important;
+  white-space: nowrap !important;
+}
+
+/* ===========================
+   DATATABLE / TREETABLE
+   =========================== */
+
+.p-datatable-column-header-content {
+  gap: 4px !important;
+}
+
+.p-datatable-header-cell {
+  padding: 4px !important;
+}
+
+.p-datatable-sort-icon {
+  height: 12px !important;
+  width: 12px !important;
+}
+
+.p-datatable-column-title {
+  white-space: normal !important;
+  line-height: 10px !important;
+  font-size: 9px !important;
+}
+
+.p-datatable-header-cell,
+.p-treetable-header-cell {
+  background-color: #e6e6e6 !important;
+  border-bottom: 1px solid #9ca3af !important;
+  text-align: center !important;
+  font-size: 9px !important;
+}
+
+.p-datatable-table-container,
+.p-treetable-table-container {
+  background-color: #e6e6e6;
+}
+
+.p-datatable.p-datatable-gridlines:has(.p-datatable-thead):has(.p-datatable-tbody)
+  .p-datatable-tbody
+  > tr
+  > td {
+  padding: 2px !important;
+}
+
+tbody.p-datatable-tbody > tr > td {
+  font-size: 9px;
+  font-weight: 600;
+  padding: 4px !important;
+}
+
+.p-datatable-selectable-row {
+  height: 20px !important;
+}
+
+.p-datatable-selectable-row[data-p-selected='true'] {
+  background-image: url(/src/assets/images/old_selected_row_style.png) !important;
+  background-size: contain !important;
+  background-repeat: repeat-x !important;
+  color: black !important;
+}
+
+.p-datatable-selectable-row:hover {
+  background-color: #b2dc32 !important;
+}
+
+.blue-rows-primevue .p-datatable-selectable-row[data-p-selected='true'] {
+  background-image: none !important;
+  background-color: #7fceff !important;
+}
+
+.blue-rows-primevue .p-datatable-selectable-row:hover {
+  background-color: #b2e1ff !important;
+}
+
+.p-datatable-row-toggle-button {
+  height: 12px !important;
+  width: 12px !important;
+}
+
+div.p-datatable-header {
+  padding: 0 !important;
+}
+
+/* ===========================
+   DIALOG
+   =========================== */
+
+.p-dialog-header,
+.p-dialog-content,
+.p-dialog-footer {
+  padding: 8px !important;
+}
+
+.p-dialog {
+  border-radius: 8px !important;
+  box-shadow: none !important;
+  border: none !important;
+}
+
+/* ===========================
+   ACCORDION
+   =========================== */
+
+.p-accordionpanel {
+  border: none !important;
+}
+
+.p-accordionheader {
+  padding: 6px !important;
+  padding-right: 12px !important;
+}
+
+.p-accordionheader[data-p-active='true'] {
+  background-color: rgb(240, 255, 240) !important;
+}
+
+.p-accordioncontent-content {
+  padding: 4px !important;
+}
+
+/* ===========================
+   MISC COMPONENTS
+   =========================== */
+
+.p-button {
+  border-radius: 3px !important;
+}
+
+.p-button[data-p='outlined'][data-p-disabled='false'][data-p-severity='contrast']:hover {
+  background-color: #dee3ff !important;
+}
+
+.p-splitbutton-button.p-button {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+}
+
+.p-splitbutton-dropdown.p-button {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  width: 20px !important;
+  padding: 0px !important;
+}
+
+.drowdown-img-custom {
+  height: 22px;
+  width: 20px;
+  background-color: #10b981;
+  cursor: pointer;
+}
+.drowdown-img-custom:hover {
+  background-color: #0fa875;
+  transition: background-color ease-in-out 0.2s;
+}
+
+.p-tieredmenu-item-label {
+  font-size: 14px !important;
+}
+
+.p-colorpicker-panel,
+.dp__outer_menu_wrap,
+.p-tieredmenu {
+  z-index: 100000 !important;
+}
+
+.p-progressbar-value {
+  background-color: #9effca !important;
+}
+
+.p-scrollpanel-bar {
+  background: #10b9818f !important;
+}
+
+.p-datepicker-panel,
+.p-popover-content,
+.p-select-overlay {
+  z-index: 100000 !important;
+}
+
+.p-badge {
+  height: 16px !important;
+  width: 16px !important;
+  min-width: 16px !important;
+  font-size: 10px !important;
+}
+
+.p-menubar {
+  border-radius: 2px !important;
+}
+
+/* ===========================
+   DATE PICKER
+   =========================== */
+
+.p-datepicker-input {
+  padding-left: 4px !important;
+  font-size: 11px !important;
+  max-width: 80px !important;
+  height: 22px !important;
+  border-radius: 2px !important;
+  border-top-right-radius: 0px !important;
+  border-bottom-right-radius: 0px !important;
+}
+
+.p-datepicker-dropdown {
+  height: 22px !important;
+  border-radius: 2px !important;
+  border-top-left-radius: 0px !important;
+  border-bottom-left-radius: 0px !important;
+}
+
+.p-accordioncontent-wrapper {
+    min-width: 0 !important;
+}

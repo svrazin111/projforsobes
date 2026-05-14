@@ -1,0 +1,13 @@
+@import 'tabulator-tables';
+
+@import './primevue-overrides.css';
+@import './datepicker.css';
+@import './tabulator.css';
+@import './leaflet.css';
+@import './jqx-window.css';
+@import './splitpanes.css';
+@import './misc.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
