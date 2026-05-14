@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col gap-2 pr-2">
+  <div class="params-layout">
     <div class="box">
       <div class="font-semibold" style="width: 200px">Станция формирования</div>
       <div class="text-[#0000BB]">{{ props.row.st_ot_esr }}</div>
@@ -258,6 +258,33 @@ const dateFormatter = (date_string: string) => {
   gap: 8px;
   font-size: 10px;
 }
+
+.params-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr));
+  align-items: start;
+  gap: 8px;
+  padding-right: 8px;
+}
+
+.params-layout > * {
+  min-width: 0;
+}
+
+.params-layout :deep(.p-datatable) {
+  max-width: 100%;
+}
+
+.params-layout :deep(.p-datatable-table-container) {
+  overflow-x: auto;
+}
+
+@media (max-width: 900px) {
+  .params-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 .empty {
   opacity: 0.5;
 }
