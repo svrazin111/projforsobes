@@ -142,33 +142,3 @@ defineExpose({
   openHistoryPane
 })
 </script>
-
-<style scoped>
-.pfm-right-header {
-  display: flex;
-  min-height: 18px;
-  border: 1px solid #a9b19f;
-  border-bottom: none;
-  background: linear-gradient(#f9fbf5, #e6eadf);
-}
-
-.pfm-right-title {
-  min-width: 0;
-  flex: 1;
-  text-align: center;
-  font-weight: 700;
-  line-height: 1.1;
-}
-
-.pfm-right-mode {
-  height: 18px;
-  color: #209000;
-  font-size: 11px;
-  line-height: 18px;
-}
-
-.pfm-right-hide {
-  width: 92px !important;
-  min-width: 92px;
-}
-</style>

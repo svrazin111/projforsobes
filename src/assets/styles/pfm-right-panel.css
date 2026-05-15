@@ -1,0 +1,341 @@
+.pfm-right-header {
+  display: flex;
+  min-height: 18px;
+  border: 1px solid #a9b19f;
+  border-bottom: none;
+  background: linear-gradient(#f9fbf5, #e6eadf);
+}
+
+.pfm-right-title {
+  min-width: 0;
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.pfm-right-mode {
+  height: 18px;
+  color: #209000;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.pfm-right-hide {
+  width: 92px !important;
+  min-width: 92px;
+}
+
+.marsh-view-panel {
+  border: 1px solid #a9b19f;
+  background: #f8f9f3;
+}
+
+.marsh-view-panel .p-accordionpanel {
+  border-color: #b8c0ad;
+}
+
+.marsh-view-panel .p-accordionheader {
+  min-height: 22px;
+  padding: 2px 6px;
+  border-radius: 0;
+  color: #197c17;
+  font-weight: 700;
+}
+
+.marsh-view-panel .p-accordioncontent-content {
+  padding: 0;
+  background: #f8f9f3;
+}
+
+.marsh-view-panel .p-scrollpanel-content {
+  background: #f8f9f3;
+}
+
+.params-layout {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  align-items: start;
+  gap: 7px 10px;
+  padding: 14px 10px 8px;
+  background: #f8f9f3;
+  color: #3b3b3b;
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.params-layout > * {
+  min-width: 0;
+}
+
+.params-layout .box {
+  display: flex;
+  min-height: 22px;
+  align-items: center;
+  gap: 4px;
+  padding: 1px 14px 1px 22px;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  font-size: 10px;
+}
+
+.params-layout .field-row {
+  display: grid;
+  grid-template-columns: 168px 50px minmax(0, 1fr);
+  align-items: center;
+  column-gap: 4px;
+}
+
+.params-layout .field-label {
+  color: #454545;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.params-layout .field-label-blue {
+  color: #0000bb;
+}
+
+.params-layout .field-code,
+.params-layout .field-value,
+.params-layout .field-wide {
+  min-height: 18px;
+  padding: 1px 5px;
+  border: 1px solid #c1c8bb;
+  background: #fff;
+  color: #0000bb;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 16px;
+}
+
+.params-layout .field-code {
+  text-align: center;
+}
+
+.params-layout .field-wide {
+  grid-column: 2 / 4;
+}
+
+.params-layout .field-row-offset {
+  grid-template-columns: 168px minmax(0, 1fr);
+  padding-top: 0;
+}
+
+.params-layout .field-row-offset .field-wide {
+  grid-column: 2;
+}
+
+.params-layout .field-count {
+  border-color: #0000bb;
+  font-weight: 700;
+}
+
+.params-layout .count-row {
+  grid-template-columns: auto 50px 1fr;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.params-layout .checkbox-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-top: 1px;
+  padding-bottom: 4px;
+  padding-left: 196px;
+  color: #8d8d8d;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.params-layout .checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 17px;
+}
+
+.params-layout .checkbox-row .p-checkbox,
+.params-layout .checkbox-row .p-checkbox-box {
+  width: 11px;
+  height: 11px;
+}
+
+.params-layout .checkbox-row .p-checkbox-box {
+  border-radius: 1px;
+}
+
+.params-layout .readonly-table-row {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  align-items: start;
+  column-gap: 4px;
+  padding: 10px 14px 10px 22px;
+}
+
+.params-layout .readonly-table {
+  min-height: 64px;
+  border: 1px solid #b8bfb0;
+  background: #fff;
+}
+
+.params-layout .readonly-body > div {
+  display: grid;
+}
+
+.params-layout .readonly-grid-3 {
+  grid-template-columns: 60px 1fr 70px;
+}
+
+.params-layout .readonly-body > div > div {
+  min-height: 19px;
+  padding: 2px 4px;
+  border-right: 1px solid #d8ded1;
+  border-bottom: 1px solid #d8ded1;
+}
+
+.params-layout .route-type-row {
+  margin-top: 6px;
+}
+
+.params-layout .route-type-value {
+  max-width: 146px;
+}
+
+.params-layout .cargo-section {
+  padding: 2px 12px 10px 0;
+}
+
+.params-layout .section-label {
+  margin-bottom: 6px;
+  padding-left: 2px;
+  color: #454545;
+  font-weight: 700;
+}
+
+.params-layout .cargo-grid {
+  min-height: 124px;
+  border: 1px solid #7f9b3f;
+  background: #fff;
+}
+
+.params-layout .cargo-head,
+.params-layout .cargo-row {
+  display: grid;
+  grid-template-columns: minmax(88px, 1fr) minmax(96px, 1fr) 54px minmax(132px, 1.4fr);
+}
+
+.params-layout .cargo-head {
+  min-height: 29px;
+  background: #75a31a;
+  color: #183f00;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.params-layout .cargo-head > div,
+.params-layout .cargo-row > div {
+  min-height: 29px;
+  padding: 2px 5px;
+  border-right: 1px solid #b9c993;
+  border-bottom: 1px solid #d8ded1;
+}
+
+.params-layout .cargo-body {
+  min-height: 94px;
+}
+
+.params-layout .rps-row {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr) 18px;
+  align-items: start;
+}
+
+.params-layout .field-value-large {
+  min-height: 42px;
+}
+
+.params-layout .side-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-left: auto;
+}
+
+.params-layout .side-action {
+  width: 15px;
+  height: 15px;
+  border: 1px solid #a8cfa3;
+  border-radius: 50%;
+  background: #e8f7e1;
+}
+
+.params-layout .side-action.add::before {
+  content: '+';
+  display: block;
+  color: #3aa52b;
+  font-weight: 700;
+  line-height: 13px;
+  text-align: center;
+}
+
+.params-layout .side-action.remove {
+  border-color: #e2ada4;
+  background: #fff1ed;
+}
+
+.params-layout .side-action.remove::before {
+  content: '×';
+  display: block;
+  color: #cf4a2e;
+  font-weight: 700;
+  line-height: 12px;
+  text-align: center;
+}
+
+.params-layout .p-datatable {
+  max-width: 100%;
+}
+
+.params-layout .p-datatable-table-container {
+  overflow-x: auto;
+}
+
+.params-layout .params-table-field,
+.params-layout .params-weight-length {
+  padding: 5px 16px 3px 18px;
+}
+
+.params-layout .params-table-field .font-semibold,
+.params-layout .params-weight-length .font-semibold {
+  color: #4d4d4d !important;
+  font-size: 10px !important;
+}
+
+.params-layout .params-table-field .p-datatable {
+  border-color: #b8bfb0 !important;
+  border-radius: 0 !important;
+}
+
+.params-layout .params-table-field .p-datatable-header-cell,
+.params-layout .params-table-field .p-datatable-thead > tr > th {
+  background: #f5f5f2 !important;
+  color: #555 !important;
+}
+
+.params-layout .params-table-field .p-datatable-tbody > tr > td {
+  border-color: #d8ded1 !important;
+  background: white !important;
+}
+
+.params-layout .params-weight-length {
+  opacity: 0.9;
+}
+
+.params-layout .empty {
+  opacity: 0.5;
+}

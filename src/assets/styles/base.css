@@ -7,6 +7,7 @@
 @import './jqx-window.css';
 @import './splitpanes.css';
 @import './misc.css';
+@import './pfm-right-panel.css';
 
 html {
   color-scheme: light;

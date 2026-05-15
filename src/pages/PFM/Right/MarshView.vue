@@ -165,31 +165,3 @@ watch(
   { deep: true }
 )
 </script>
-
-<style scoped>
-.marsh-view-panel {
-  border: 1px solid #a9b19f;
-  background: #f8f9f3;
-}
-
-.marsh-view-panel :deep(.p-accordionpanel) {
-  border-color: #b8c0ad;
-}
-
-.marsh-view-panel :deep(.p-accordionheader) {
-  min-height: 22px;
-  padding: 2px 6px;
-  border-radius: 0;
-  color: #197c17;
-  font-weight: 700;
-}
-
-.marsh-view-panel :deep(.p-accordioncontent-content) {
-  padding: 0;
-  background: #f8f9f3;
-}
-
-.marsh-view-panel :deep(.p-scrollpanel-content) {
-  background: #f8f9f3;
-}
-</style>
