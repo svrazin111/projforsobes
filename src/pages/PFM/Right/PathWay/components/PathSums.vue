@@ -1,28 +1,30 @@
 <template>
-  <div>
-    <div class="flex">
-      <div :style="{ width: `${left_offset}px` }"></div>
-      <div :style="{ width: `${len_sum_width}px` }" class="box brn">{{ len_sum.toFixed(0) }}</div>
-      <div :style="{ width: `${tuch_sum_width}px` }" class="box brn">{{ tuch_sum.toFixed(2) }}</div>
-      <div :style="{ width: `${tst_sum_width}px` }" class="box brn">{{ tst_sum.toFixed(2) }}</div>
-      <div :style="{ width: `${euch_sum_width}px` }" class="box brn">{{ euch_sum.toFixed(2) }}</div>
-      <div :style="{ width: `${est_sum_width}px` }" class="box">{{ est_sum.toFixed(2) }}</div>
-      <div
-        :style="{ width: `${ves_max_min_width}px` }"
-        v-if="props.isFull"
-        class="box border !border-l-0"
-      >
-        {{ ves_max_min.toFixed(0) }}
+  <div class="path-sums-viewport" :style="{ width: sums_viewport_width }">
+    <div class="path-sums-content" :style="{ transform: `translateX(-${props.scrollLeft}px)` }">
+      <div class="flex" :style="{ width: `${total_width}px` }">
+        <div :style="{ width: `${left_offset}px` }" class="path-sums-spacer"></div>
+        <div :style="{ width: `${len_sum_width}px` }" class="box brn">{{ len_sum.toFixed(0) }}</div>
+        <div :style="{ width: `${tuch_sum_width}px` }" class="box brn">{{ tuch_sum.toFixed(2) }}</div>
+        <div :style="{ width: `${tst_sum_width}px` }" class="box brn">{{ tst_sum.toFixed(2) }}</div>
+        <div :style="{ width: `${euch_sum_width}px` }" class="box brn">{{ euch_sum.toFixed(2) }}</div>
+        <div :style="{ width: `${est_sum_width}px` }" class="box">{{ est_sum.toFixed(2) }}</div>
+        <div
+          :style="{ width: `${ves_max_min_width}px` }"
+          v-if="props.isFull"
+          class="box border !border-l-0"
+        >
+          {{ ves_max_min.toFixed(0) }}
+        </div>
       </div>
-    </div>
-    <div class="flex">
-      <div :style="{ width: `${left_offset}px` }"></div>
-      <div :style="{ width: `${len_sum_width}px` }"></div>
-      <div :style="{ width: `${tuch_sum_width + tst_sum_width}px` }" class="box2 brn btn">
-        {{ (tuch_sum + tst_sum).toFixed(2) }}
-      </div>
-      <div :style="{ width: `${euch_sum_width + est_sum_width}px` }" class="box2 btn">
-        {{ (euch_sum + est_sum).toFixed(2) }}
+      <div class="flex" :style="{ width: `${total_width}px` }">
+        <div :style="{ width: `${left_offset}px` }" class="path-sums-spacer"></div>
+        <div :style="{ width: `${len_sum_width}px` }" class="path-sums-spacer"></div>
+        <div :style="{ width: `${tuch_sum_width + tst_sum_width}px` }" class="box2 brn btn">
+          {{ (tuch_sum + tst_sum).toFixed(2) }}
+        </div>
+        <div :style="{ width: `${euch_sum_width + est_sum_width}px` }" class="box2 btn">
+          {{ (euch_sum + est_sum).toFixed(2) }}
+        </div>
       </div>
     </div>
   </div>
@@ -37,10 +39,14 @@ const props = withDefaults(
   defineProps<{
     rows?: WayFull[] | WayPfFull[]
     real_widths: number[]
+    scrollLeft?: number
+    viewportWidth?: number
     isFull?: boolean
   }>(),
   {
     rows: () => [],
+    scrollLeft: 0,
+    viewportWidth: 0,
     isFull: false
   }
 )
@@ -80,6 +86,22 @@ const euch_sum_width = ref(0)
 const est_sum_width = ref(0)
 const ves_max_min_width = ref(0)
 
+const total_width = computed(() => {
+  return (
+    left_offset.value +
+    len_sum_width.value +
+    tuch_sum_width.value +
+    tst_sum_width.value +
+    euch_sum_width.value +
+    est_sum_width.value +
+    ves_max_min_width.value
+  )
+})
+
+const sums_viewport_width = computed(() => {
+  return props.viewportWidth > 0 ? `${props.viewportWidth}px` : '100%'
+})
+
 const updateWidths = () => {
   if (!props.real_widths || !props.real_widths.length) return
 
@@ -104,6 +126,21 @@ watch(
 </script>
 
 <style scoped>
+.path-sums-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.path-sums-content {
+  width: max-content;
+}
+
+.path-sums-spacer,
+.box {
+  box-sizing: border-box;
+  flex: 0 0 auto;
+}
+
 .box {
   border: solid blue 1px;
   padding: 1px;
@@ -112,6 +149,8 @@ watch(
   font-size: 10px;
 }
 .box2 {
+  box-sizing: border-box;
+  flex: 0 0 auto;
   border: solid blue 1px;
   padding: 1px;
   text-align: center;

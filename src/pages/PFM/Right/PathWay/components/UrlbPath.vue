@@ -3,7 +3,13 @@
     <div class="font-semibold whitespace-nowrap text-[11px] text-[#0000BB]">
       Путь следования в бригадных участках
     </div>
-    <GridAdvanced :rows="rows" :cols="columns" @column-resized="onColumnResized" />
+    <GridAdvanced
+      :rows="rows"
+      :cols="columns"
+      @column-resized="onColumnResized"
+      @scroll-left-changed="onScrollLeftChanged"
+      @scroll-viewport-changed="onScrollViewportChanged"
+    />
   </div>
 </template>
 
@@ -30,9 +36,19 @@ const props = withDefaults(
 )
 
 const real_widths = defineModel<number[]>( 'real_widths', { default: [], required: true })
+const scroll_left = defineModel<number>('scrollLeft', { default: 0, required: false })
+const viewport_width = defineModel<number>('viewportWidth', { default: 0, required: false })
 
 const onColumnResized = (widths: number[]) => {
   real_widths.value = widths
+}
+
+const onScrollLeftChanged = (scrollLeft: number) => {
+  scroll_left.value = scrollLeft
+}
+
+const onScrollViewportChanged = (viewportWidth: number) => {
+  viewport_width.value = viewportWidth
 }
 
 const rows = computed(() => {

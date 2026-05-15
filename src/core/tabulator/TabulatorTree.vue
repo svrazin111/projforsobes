@@ -55,12 +55,22 @@ const props = withDefaults(
   }
 )
 
-const emit = defineEmits(['rowDblClick', 'rowSelectionChanged', 'dataSorted', 'columnResized'])
+const emit = defineEmits([
+  'rowDblClick',
+  'rowSelectionChanged',
+  'dataSorted',
+  'columnResized',
+  'scrollLeftChanged',
+  'scrollViewportChanged'
+])
 
 const grid = useTemplateRef('grid')
 
 let table: Tabulator = undefined
 let resizeFrame = 0
+let scrollFrame = 0
+let tableScrollHolder: Element | null = null
+let tableScrollResizeObserver: ResizeObserver | null = null
 
 const emitColumnWidths = () => {
   if (!table) return
@@ -74,6 +84,31 @@ const emitColumnWidths = () => {
 const scheduleColumnWidthsEmit = () => {
   cancelAnimationFrame(resizeFrame)
   resizeFrame = requestAnimationFrame(emitColumnWidths)
+}
+
+const emitScrollLeft = () => {
+  emit('scrollLeftChanged', tableScrollHolder?.scrollLeft ?? 0)
+  emit('scrollViewportChanged', tableScrollHolder?.clientWidth ?? 0)
+}
+
+const scheduleScrollLeftEmit = () => {
+  cancelAnimationFrame(scrollFrame)
+  scrollFrame = requestAnimationFrame(emitScrollLeft)
+}
+
+const bindScrollHolder = () => {
+  tableScrollHolder?.removeEventListener('scroll', scheduleScrollLeftEmit)
+  tableScrollResizeObserver?.disconnect()
+
+  tableScrollHolder = grid.value?.querySelector('.tabulator-tableholder') ?? null
+  tableScrollHolder?.addEventListener('scroll', scheduleScrollLeftEmit)
+
+  if (tableScrollHolder) {
+    tableScrollResizeObserver = new ResizeObserver(scheduleScrollLeftEmit)
+    tableScrollResizeObserver.observe(tableScrollHolder)
+  }
+
+  emitScrollLeft()
 }
 
 const stopLiveColumnResize = () => {
@@ -178,13 +213,17 @@ onMounted(() => {
 
   setTimeout(() => {
     emitColumnWidths()
+    bindScrollHolder()
   }, 1000)
 })
 
 onUnmounted(() => {
   cancelAnimationFrame(resizeFrame)
+  cancelAnimationFrame(scrollFrame)
   grid.value?.removeEventListener('mousedown', startLiveColumnResize, true)
   grid.value?.removeEventListener('touchstart', startLiveColumnResize, true)
+  tableScrollHolder?.removeEventListener('scroll', scheduleScrollLeftEmit)
+  tableScrollResizeObserver?.disconnect()
   stopLiveColumnResize()
 })
 

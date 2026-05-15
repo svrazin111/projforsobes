@@ -38,6 +38,8 @@
       :initialSort="props.initialSort"
       @dataSorted="onSortChanged"
       @columnResized="onColumnResized"
+      @scrollLeftChanged="onScrollLeftChanged"
+      @scrollViewportChanged="onScrollViewportChanged"
       @rowSelectionChanged="
         (e) =>
           emit(
@@ -57,7 +59,12 @@ import images from '@/shared/images/imported_images'
 
 import TabulatorTree from './TabulatorTree.vue'
 
-const emit = defineEmits(['rowSelectionChanged', 'columnResized'])
+const emit = defineEmits([
+  'rowSelectionChanged',
+  'columnResized',
+  'scrollLeftChanged',
+  'scrollViewportChanged'
+])
 
 const table = useTemplateRef<InstanceType<typeof TabulatorTree>>('tabulator')
 
@@ -104,6 +111,14 @@ const unsort = () => {
 
 const onColumnResized = (widths: number[]) => {
   emit('columnResized', widths)
+}
+
+const onScrollLeftChanged = (scrollLeft: number) => {
+  emit('scrollLeftChanged', scrollLeft)
+}
+
+const onScrollViewportChanged = (viewportWidth: number) => {
+  emit('scrollViewportChanged', viewportWidth)
 }
 
 defineExpose({ table })

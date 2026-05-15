@@ -31,6 +31,8 @@
       <template v-slot:path-table>
         <UrlbPath
           v-model:real_widths="path_table_real_widths"
+          v-model:scroll-left="path_table_scroll_left"
+          v-model:viewport-width="path_table_viewport_width"
           :isFull="true"
           :rows="ways_full"
           :stk_only="stk_only"
@@ -38,18 +40,31 @@
         />
       </template>
       <template v-slot:path-sums-table>
-        <PathSums :real_widths="path_table_real_widths" :isFull="true" :rows="ways_full" />
+        <PathSums
+          :real_widths="path_table_real_widths"
+          :scroll-left="path_table_scroll_left"
+          :viewport-width="path_table_viewport_width"
+          :isFull="true"
+          :rows="ways_full"
+        />
       </template>
       <template v-slot:path-pf-table>
         <UrlbPath
           v-model:real_widths="path_pf_table_real_widths"
+          v-model:scroll-left="path_pf_table_scroll_left"
+          v-model:viewport-width="path_pf_table_viewport_width"
           :rows="props.ways_pf_full"
           :stk_only="stk_only"
           style="width: 740px"
         />
       </template>
       <template v-slot:path-pf-sums-table>
-        <PathSums :real_widths="path_pf_table_real_widths" :rows="props.ways_pf_full" />
+        <PathSums
+          :real_widths="path_pf_table_real_widths"
+          :scroll-left="path_pf_table_scroll_left"
+          :viewport-width="path_pf_table_viewport_width"
+          :rows="props.ways_pf_full"
+        />
       </template>
     </PathWayLayout>
   </div>
@@ -89,6 +104,10 @@ const opor_ids = ref<(string | number)[]>([])
 
 const path_table_real_widths = ref<number[]>([])
 const path_pf_table_real_widths = ref<number[]>([])
+const path_table_scroll_left = ref(0)
+const path_pf_table_scroll_left = ref(0)
+const path_table_viewport_width = ref(0)
+const path_pf_table_viewport_width = ref(0)
 
 const openMap = () => {
   if (!props.row?.st_ot_id || !props.row?.st_nz_id) return
