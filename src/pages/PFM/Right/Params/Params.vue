@@ -550,20 +550,17 @@ const dateFormatter = (date_string: string) => {
 }
 
 .params-table-field,
-.params-cargo-field,
 .params-weight-length {
   padding: 5px 16px 3px 18px;
 }
 
 .params-table-field :deep(.font-semibold),
-.params-cargo-field :deep(.font-semibold),
 .params-weight-length :deep(.font-semibold) {
   color: #4d4d4d !important;
   font-size: 10px !important;
 }
 
-.params-table-field :deep(.p-datatable),
-.params-cargo-field :deep(.p-datatable) {
+.params-table-field :deep(.p-datatable) {
   border-color: #b8bfb0 !important;
   border-radius: 0 !important;
 }
@@ -574,21 +571,9 @@ const dateFormatter = (date_string: string) => {
   color: #555 !important;
 }
 
-.params-cargo-field :deep(.p-datatable-header-cell),
-.params-cargo-field :deep(.p-datatable-thead > tr > th) {
-  background: #75a31a !important;
-  color: #173a00 !important;
-  font-weight: 700;
-}
-
-.params-table-field :deep(.p-datatable-tbody > tr > td),
-.params-cargo-field :deep(.p-datatable-tbody > tr > td) {
+.params-table-field :deep(.p-datatable-tbody > tr > td) {
   border-color: #d8ded1 !important;
   background: white !important;
-}
-
-.params-cargo-field :deep(.p-datatable) {
-  min-height: 124px;
 }
 
 .params-weight-length {
