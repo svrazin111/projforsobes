@@ -76,17 +76,19 @@ const moveRight = () => {
 .scrollable {
   position: absolute;
   display: flex;
-  width: 10000px;
   left: 40px;
+  right: 40px;
+  min-width: 0;
   transition: all ease-in-out 0.5s;
   overflow: hidden;
 }
 .panel {
   display: flex;
   overflow: hidden;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
+  right: 0;
   width: 100%;
   height: 28px;
   background-color: #cbd5e1;

@@ -2,7 +2,7 @@
   <div class="h-full w-full">
     <splitpanes class="default-theme">
       <pane :size="100 - params_size">
-        <splitpanes class="default-theme" style="height: calc(100% - 84px)">
+        <splitpanes class="default-theme" style="height: calc(100% - 184px)">
           <!-- ? Панель фильтров -->
           <pane :size="filters_size">
             <div class="flex gap-0.5 !h-6">
