@@ -48,14 +48,9 @@
 
       <!-- ? Правая часть -->
       <pane :size="params_size" id="params">
-        <div class="flex">
-          <div
-            style="width: calc(100% - 160px)"
-            class="h-[24px] whitespace-nowrap text-center font-semibold text-red-800 uppercase p-1 bg-gray-100 rounded-md"
-          >
-            <div style="text-overflow: ellipsis; overflow: hidden" v-tooltip="$slots">
-              <slot name="row-title" />
-            </div>
+        <div class="pfm-right-header">
+          <div class="pfm-right-title">
+            <div class="pfm-right-mode">ПРОСМОТР</div>
           </div>
           <Button
             @click="hideParamsTab"
@@ -63,8 +58,7 @@
             icon="pi pi-angle-right"
             iconPos="right"
             severity="info"
-            class="!h-6"
-            style="width: 160px"
+            class="!h-6 pfm-right-hide"
             fluid
           />
         </div>
@@ -148,3 +142,33 @@ defineExpose({
   openHistoryPane
 })
 </script>
+
+<style scoped>
+.pfm-right-header {
+  display: flex;
+  min-height: 18px;
+  border: 1px solid #a9b19f;
+  border-bottom: none;
+  background: linear-gradient(#f9fbf5, #e6eadf);
+}
+
+.pfm-right-title {
+  min-width: 0;
+  flex: 1;
+  text-align: center;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.pfm-right-mode {
+  height: 18px;
+  color: #209000;
+  font-size: 11px;
+  line-height: 18px;
+}
+
+.pfm-right-hide {
+  width: 92px !important;
+  min-width: 92px;
+}
+</style>

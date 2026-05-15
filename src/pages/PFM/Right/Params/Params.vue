@@ -1,62 +1,105 @@
 <template>
   <div class="params-layout">
-    <div class="box">
-      <div class="font-semibold" style="width: 200px">Станция формирования</div>
-      <div class="text-[#0000BB]">{{ props.row.st_ot_esr }}</div>
-      <div class="text-[#0000BB]">{{ props.row.st_ot_name }}</div>
+    <div class="box field-row station-row">
+      <div class="field-label">Станция формирования</div>
+      <div class="field-code">{{ props.row.st_ot_esr }}</div>
+      <div class="field-value">{{ props.row.st_ot_name }}</div>
     </div>
-    <div class="box">
-      <div class="font-semibold" style="width: 200px">Станция назначения</div>
-      <div class="text-[#0000BB]">{{ props.row.st_nz_esr }}</div>
-      <div class="text-[#0000BB]">{{ props.row.st_nz_name }}</div>
+    <div class="box field-row station-row">
+      <div class="field-label">Станция назначения</div>
+      <div class="field-code">{{ props.row.st_nz_esr }}</div>
+      <div class="field-value">{{ props.row.st_nz_name }}</div>
     </div>
-    <div class="box">
-      <div style="color: blue; font-weight: 600">Кол-во станций, освобожденных от переработки</div>
-      <div class="border ml-3 text-center w-10">{{ props.st_perer_count }}</div>
+    <div class="box field-row count-row">
+      <div class="field-label field-label-blue">Количество станций освобождаемых от переработки</div>
+      <div class="field-code field-count">{{ props.st_perer_count }}</div>
     </div>
-    <div class="box">
-      <div class="font-semibold" style="width: 200px">Тип по отправлению</div>
-      <div class="text-[#0000BB]">{{ props.row.type_ot_name }}</div>
+    <div class="box field-row select-row">
+      <div class="field-label">Тип по отправлению/прибытию</div>
+      <div class="field-wide">{{ props.row.type_ot_name }}</div>
     </div>
-    <div class="box">
-      <div class="font-semibold" style="width: 200px">Тип по прибытию</div>
-      <div class="text-[#0000BB]">{{ props.row.type_nz_name }}</div>
+    <div class="box field-row select-row field-row-offset">
+      <div class="field-wide">{{ props.row.type_nz_name }}</div>
     </div>
-    <div class="box">
-      <div class="font-semibold" style="width: 200px">Вид маршрута</div>
-      <div class="text-[#0000BB]">{{ props.row.gr_state_mnemo }}</div>
+    <div class="checkbox-block">
+      <div class="checkbox-row">
+        <Checkbox v-model="on_time_tab_value" binary size="small" />
+        <span>по расписанию</span>
+      </div>
+      <div class="checkbox-row">
+        <Checkbox v-model="inno_vag_value" binary size="small" />
+        <span>из инновационных вагонов</span>
+      </div>
     </div>
     <StationsMultiSelector
       v-if="props.row.type_ot == '2' || props.row.type_ot == '9'"
+      class="params-table-field"
       label="Станции погрузки"
       v-model="st_pogr_copy"
       locked
     />
     <StationsMultiSelector
       v-if="props.row.type_nz == '12'"
+      class="params-table-field"
       label="Станции назначения вагонов маршрута в расформировании"
       v-model="st_rasf_copy"
       :diapasones="st_rasf_diapasones_copy"
       locked
     />
 
-    <div class="box flex items-center">
-      <Checkbox v-model="on_time_tab_value" binary size="small" />
-      <div class="font-semibold">По расписанию</div>
+    <div class="readonly-table-row">
+      <div class="field-label">Станции заадресовки</div>
+      <div class="readonly-table stations-table">
+        <div class="readonly-body">
+          <div v-for="station in st_zaadres_copy" :key="station.stan_id" class="readonly-grid-3">
+            <div>{{ station.esr }}</div>
+            <div>{{ station.vname }}</div>
+            <div>{{ station.road_name }}</div>
+          </div>
+          <div v-for="index in emptyZaadresRows" :key="`empty-${index}`" class="readonly-grid-3">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="box flex items-center">
-      <Checkbox v-model="inno_vag_value" binary size="small" />
-      <div class="font-semibold">Из инновационных вагонов</div>
-    </div>
-    <StationsMultiSelector label="Станции заадресовки" v-model="st_zaadres_copy" locked />
-    <CargoSelector v-model="cargo_copy" locked />
 
-    <div class="box" :class="{ empty: props.rps.length == 0 || !props.rps[0]['rod_vag'] }">
-      <div class="font-semibold" style="width: 200px">Род подвижного состава</div>
-      <div>
+    <div class="box field-row select-row route-type-row">
+      <div class="field-label">Вид маршрута</div>
+      <div class="field-wide route-type-value">{{ props.row.gr_state_mnemo }}</div>
+    </div>
+
+    <div class="cargo-section">
+      <div class="section-label">Род/Группа/Код груза</div>
+      <div class="cargo-grid">
+        <div class="cargo-head">
+          <div>Нефть и нефтепродукты</div>
+          <div>Нефтепродукты темные</div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="cargo-body">
+          <div v-for="cargo in cargo_copy" :key="cargo.num" class="cargo-row">
+            <div>{{ cargo.rod_gr_name }}</div>
+            <div>{{ cargo.group_gr_name }}</div>
+            <div>{{ cargo.cod_gr }}</div>
+            <div>{{ cargo.gr_vname }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box rps-row" :class="{ empty: props.rps.length == 0 || !props.rps[0]['rod_vag'] }">
+      <div class="field-label">Род подвижного состава</div>
+      <div class="field-value field-value-large">
         <div v-for="rps in props.rps" :key="rps.rod_vag" class="text-[#0000BB] mb-1">
           {{ rps.rod_vag }} {{ rps.rod_vag_fname }}
         </div>
+      </div>
+      <div class="side-actions">
+        <span class="side-action add"></span>
+        <span class="side-action remove"></span>
       </div>
     </div>
     <div class="box" :class="{ empty: !props.row.prop_type_name }">
@@ -123,6 +166,7 @@
       </div>
     </div>
     <WeightLength
+      class="params-weight-length"
       :marsh_id="props.row.marsh_id"
       :weight_base="props.row.weight_base"
       :weight_1="props.row.weight_1"
@@ -166,7 +210,6 @@ import { cloneDeep } from 'lodash'
 import { Checkbox } from 'primevue'
 import { computed } from 'vue'
 
-import CargoSelector from '@/components/selector/CargoSelector.vue'
 import StationsMultiSelector from '@/components/selector/station/StationsMultiSelector.vue'
 import { forever, parseDateDDMMYYYY } from '@/shared/date'
 import images from '@/shared/images/imported_images'
@@ -231,6 +274,9 @@ const st_zaadres_copy = computed(() => {
 const cargo_copy = computed(() => {
   return cloneDeep(props.cargo)
 })
+const emptyZaadresRows = computed(() => {
+  return Math.max(3 - st_zaadres_copy.value.length, 0)
+})
 const inno_vag_value = computed(() => {
   return props.row.inno_vag == '1'
 })
@@ -251,24 +297,248 @@ const dateFormatter = (date_string: string) => {
 <style scoped>
 .box {
   display: flex;
-  border: solid lightgray 1px;
-  background-color: white;
-  border-radius: 4px;
-  padding: 2px;
-  gap: 8px;
+  min-height: 22px;
+  align-items: center;
+  border: none;
+  background-color: transparent;
+  border-radius: 0;
+  padding: 1px 14px 1px 22px;
+  gap: 4px;
   font-size: 10px;
 }
 
 .params-layout {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 560px), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
   align-items: start;
-  gap: 8px;
-  padding-right: 8px;
+  gap: 7px 10px;
+  padding: 14px 10px 8px 10px;
+  background: #f8f9f3;
+  color: #3b3b3b;
+  font-size: 9px;
+  font-weight: 600;
 }
 
 .params-layout > * {
   min-width: 0;
+}
+
+.field-row {
+  display: grid;
+  grid-template-columns: 168px 50px minmax(0, 1fr);
+  column-gap: 4px;
+  align-items: center;
+}
+
+.field-label {
+  color: #454545;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.field-label-blue {
+  color: #0000bb;
+}
+
+.field-code,
+.field-value,
+.field-wide {
+  min-height: 18px;
+  border: 1px solid #c1c8bb;
+  background: #fff;
+  color: #0000bb;
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 16px;
+  padding: 1px 5px;
+}
+
+.field-code {
+  text-align: center;
+}
+
+.field-wide {
+  grid-column: 2 / 4;
+}
+
+.field-row-offset {
+  grid-template-columns: 168px minmax(0, 1fr);
+  padding-top: 0;
+}
+
+.field-row-offset .field-wide {
+  grid-column: 2;
+}
+
+.field-count {
+  border-color: #0000bb;
+  font-weight: 700;
+}
+
+.count-row {
+  grid-template-columns: auto 50px 1fr;
+  padding-top: 2px;
+  padding-bottom: 2px;
+}
+
+.checkbox-block {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding-left: 196px;
+  padding-top: 1px;
+  padding-bottom: 4px;
+  color: #8d8d8d;
+  font-size: 9px;
+  font-weight: 400;
+}
+
+.checkbox-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  height: 17px;
+}
+
+.checkbox-row :deep(.p-checkbox) {
+  width: 11px;
+  height: 11px;
+}
+
+.checkbox-row :deep(.p-checkbox-box) {
+  width: 11px;
+  height: 11px;
+  border-radius: 1px;
+}
+
+.readonly-table-row {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr);
+  column-gap: 4px;
+  align-items: start;
+  padding: 10px 14px 10px 22px;
+}
+
+.readonly-table {
+  min-height: 64px;
+  border: 1px solid #b8bfb0;
+  background: #fff;
+}
+
+.readonly-body > div {
+  display: grid;
+}
+
+.readonly-grid-3 {
+  grid-template-columns: 60px 1fr 70px;
+}
+
+.readonly-body > div > div {
+  min-height: 19px;
+  border-right: 1px solid #d8ded1;
+  border-bottom: 1px solid #d8ded1;
+  padding: 2px 4px;
+}
+
+.route-type-row {
+  margin-top: 6px;
+}
+
+.route-type-value {
+  max-width: 146px;
+}
+
+.cargo-section {
+  padding: 2px 12px 10px 0;
+}
+
+.section-label {
+  margin-bottom: 6px;
+  padding-left: 2px;
+  color: #454545;
+  font-weight: 700;
+}
+
+.cargo-grid {
+  min-height: 124px;
+  border: 1px solid #7f9b3f;
+  background: #fff;
+}
+
+.cargo-head,
+.cargo-row {
+  display: grid;
+  grid-template-columns: minmax(88px, 1fr) minmax(96px, 1fr) 54px minmax(132px, 1.4fr);
+}
+
+.cargo-head {
+  min-height: 29px;
+  background: #75a31a;
+  color: #183f00;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.cargo-head > div,
+.cargo-row > div {
+  min-height: 29px;
+  border-right: 1px solid #b9c993;
+  border-bottom: 1px solid #d8ded1;
+  padding: 2px 5px;
+}
+
+.cargo-body {
+  min-height: 94px;
+}
+
+.rps-row {
+  display: grid;
+  grid-template-columns: 168px minmax(0, 1fr) 18px;
+  align-items: start;
+}
+
+.field-value-large {
+  min-height: 42px;
+}
+
+.side-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-left: auto;
+}
+
+.side-action {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  border: 1px solid #a8cfa3;
+  background: #e8f7e1;
+}
+
+.side-action.add::before {
+  content: '+';
+  display: block;
+  color: #3aa52b;
+  font-weight: 700;
+  line-height: 13px;
+  text-align: center;
+}
+
+.side-action.remove {
+  border-color: #e2ada4;
+  background: #fff1ed;
+}
+
+.side-action.remove::before {
+  content: '×';
+  display: block;
+  color: #cf4a2e;
+  font-weight: 700;
+  line-height: 12px;
+  text-align: center;
 }
 
 .params-layout :deep(.p-datatable) {
@@ -279,10 +549,50 @@ const dateFormatter = (date_string: string) => {
   overflow-x: auto;
 }
 
-@media (max-width: 900px) {
-  .params-layout {
-    grid-template-columns: 1fr;
-  }
+.params-table-field,
+.params-cargo-field,
+.params-weight-length {
+  padding: 5px 16px 3px 18px;
+}
+
+.params-table-field :deep(.font-semibold),
+.params-cargo-field :deep(.font-semibold),
+.params-weight-length :deep(.font-semibold) {
+  color: #4d4d4d !important;
+  font-size: 10px !important;
+}
+
+.params-table-field :deep(.p-datatable),
+.params-cargo-field :deep(.p-datatable) {
+  border-color: #b8bfb0 !important;
+  border-radius: 0 !important;
+}
+
+.params-table-field :deep(.p-datatable-header-cell),
+.params-table-field :deep(.p-datatable-thead > tr > th) {
+  background: #f5f5f2 !important;
+  color: #555 !important;
+}
+
+.params-cargo-field :deep(.p-datatable-header-cell),
+.params-cargo-field :deep(.p-datatable-thead > tr > th) {
+  background: #75a31a !important;
+  color: #173a00 !important;
+  font-weight: 700;
+}
+
+.params-table-field :deep(.p-datatable-tbody > tr > td),
+.params-cargo-field :deep(.p-datatable-tbody > tr > td) {
+  border-color: #d8ded1 !important;
+  background: white !important;
+}
+
+.params-cargo-field :deep(.p-datatable) {
+  min-height: 124px;
+}
+
+.params-weight-length {
+  opacity: 0.9;
 }
 
 .empty {

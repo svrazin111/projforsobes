@@ -2,16 +2,13 @@
   <FiltersPanel
     v-if="props.row"
     ref="accordion"
+    class="marsh-view-panel"
     single
     hide_count
     show_dots
     open_first
-    :filters="[
-      { title: 'Основные характеристики', slot: 'params', value: [] },
-      { title: 'Путь следования', slot: 'path-way', value: [] },
-      { title: 'Экономика', slot: 'economy', value: [] },
-      { title: 'Прикрепленные документы', slot: 'documents', value: [] }
-    ]"
+    title_color="#197c17"
+    :filters="filters"
   >
     <template v-slot:params>
       <ScrollPanel class="w-full" style="height: calc(100vh - 290px)">
@@ -101,6 +98,17 @@ const props = withDefaults(
 
 const accordion = useTemplateRef('accordion')
 
+const filters = computed(() => [
+  {
+    title: `Основные характеристики ${props.row?.st_ot_name ?? ''} -> ${props.row?.st_nz_name ?? ''} ${props.row?.rod_gr_name ?? ''}`,
+    slot: 'params',
+    value: []
+  },
+  { title: 'Путь следования', slot: 'path-way', value: [] },
+  { title: 'Экономика', slot: 'economy', value: [] },
+  { title: 'Прикрепленные документы', slot: 'documents', value: [] }
+])
+
 const st_perer_count = computed(() => stPererCount(pf_st.value))
 const pfm_st = ref<PfmSt[]>([])
 const pf_st = ref<PfSt[]>([])
@@ -157,3 +165,31 @@ watch(
   { deep: true }
 )
 </script>
+
+<style scoped>
+.marsh-view-panel {
+  border: 1px solid #a9b19f;
+  background: #f8f9f3;
+}
+
+.marsh-view-panel :deep(.p-accordionpanel) {
+  border-color: #b8c0ad;
+}
+
+.marsh-view-panel :deep(.p-accordionheader) {
+  min-height: 22px;
+  padding: 2px 6px;
+  border-radius: 0;
+  color: #197c17;
+  font-weight: 700;
+}
+
+.marsh-view-panel :deep(.p-accordioncontent-content) {
+  padding: 0;
+  background: #f8f9f3;
+}
+
+.marsh-view-panel :deep(.p-scrollpanel-content) {
+  background: #f8f9f3;
+}
+</style>
